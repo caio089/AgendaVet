@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgendaVet — Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="flex min-h-screen items-center justify-center bg-gradient-to-br from-teal-900 via-teal-800 to-emerald-900 px-4">
+
+  <div id="toast" class="hidden opacity-0" role="status"></div>
+
+  <div class="w-full max-w-md">
+    <!-- Cabeçalho -->
+    <div class="mb-8 text-center text-white">
+      <p class="text-sm uppercase tracking-widest text-teal-200">Sistema Acadêmico</p>
+      <h1 class="mt-2 text-4xl font-bold">AgendaVet</h1>
+      <p class="mt-2 text-teal-100">Gestão de clínica veterinária</p>
+    </div>
+
+    <!-- Formulário de login -->
+    <div class="rounded-2xl bg-white p-8 shadow-2xl ring-1 ring-slate-200">
+      <h2 class="text-xl font-semibold text-slate-800">Entrar no sistema</h2>
+      <p class="mt-1 text-sm text-slate-500">Use suas credenciais para acessar o painel.</p>
+
+      <form id="login-form" class="mt-6 space-y-4">
+        <div>
+          <label class="mb-1 block text-sm font-medium text-slate-700" for="email">E-mail</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autocomplete="username"
+            placeholder="admin@agendavet.com"
+            class="w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200"
+          />
+        </div>
+        <div>
+          <label class="mb-1 block text-sm font-medium text-slate-700" for="senha">Senha</label>
+          <input
+            id="senha"
+            name="senha"
+            type="password"
+            required
+            autocomplete="current-password"
+            placeholder="••••••••"
+            class="w-full rounded-lg border border-slate-300 px-3 py-2.5 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200"
+          />
+        </div>
+        <button
+          type="submit"
+          class="mt-2 w-full rounded-lg bg-teal-700 py-2.5 text-sm font-semibold text-white hover:bg-teal-800"
+        >
+          Entrar
+        </button>
+      </form>
+
+      <!-- Credenciais de demonstração -->
+      <div class="mt-6 rounded-lg bg-slate-50 p-4 text-xs text-slate-600">
+        <p class="font-semibold text-slate-700">Usuários de teste:</p>
+        <ul class="mt-2 space-y-1">
+          <li><strong>Admin:</strong> admin@agendavet.com / admin123</li>
+          <li><strong>Recepção:</strong> recepcao@agendavet.com / recepcao123</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/pages/login.js"></script>
+</body>
+</html>

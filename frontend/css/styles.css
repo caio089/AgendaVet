@@ -1,0 +1,24 @@
+/**
+ * Estilos complementares ao Tailwind CSS.
+ * A maior parte do visual vem do CDN do Tailwind; aqui ficam detalhes extras.
+ */
+
+/* Scrollbar mais discreta na sidebar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+}
+
+/* Transição suave do toast de feedback */
+#toast {
+  transition: opacity 0.3s ease;
+}
+
+/* Linha da tabela com hover sutil */
+.table-row-hover:hover {
+  background-color: rgb(248 250 252);
+}

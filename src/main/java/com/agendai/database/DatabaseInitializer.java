@@ -1,85 +1,88 @@
 package com.agendai.database;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class DatabaseInitializer {
+/**
+ * Cria todas as tabelas do sistema (módulo Icaro Ryan).
+ * Chamado uma vez na inicialização do servidor.
+ */
+public final class DatabaseInitializer {
+
+    private DatabaseInitializer() {
+    }
 
     public static void init() {
+        try (Connection conn = DatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement()) {
 
-        try (Connection conn = DatabaseConnection.getConnection()) {
+            stmt.execute("""
+                    CREATE TABLE IF NOT EXISTS usuario (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        nome TEXT NOT NULL,
+                        email TEXT NOT NULL UNIQUE,
+                        senha TEXT NOT NULL,
+                        perfil TEXT NOT NULL DEFAULT 'admin'
+                    )
+                    """);
 
-            String usuario =
-                    "CREATE TABLE IF NOT EXISTS usuario (" +
-                            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                            "nome TEXT," +
-                            "email TEXT," +
-                            "senha TEXT," +
-                            "perfil TEXT" +
-                            ")";
+            stmt.execute("""
+                    CREATE TABLE IF NOT EXISTS tutor (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        nome TEXT NOT NULL,
+                        cpf TEXT NOT NULL UNIQUE,
+                        telefone TEXT,
+                        endereco TEXT
+                    )
+                    """);
 
-            String tutor =
-                    "CREATE TABLE IF NOT EXISTS tutor (" +
-                            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                            "nome TEXT," +
-                            "cpf TEXT," +
-                            "telefone TEXT," +
-                            "endereco TEXT" +
-                            ")";
+            stmt.execute("""
+                    CREATE TABLE IF NOT EXISTS animal (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        nome TEXT NOT NULL,
+                        especie TEXT NOT NULL,
+                        raca TEXT,
+                        peso REAL NOT NULL,
+                        tutor_id INTEGER NOT NULL,
+                        FOREIGN KEY (tutor_id) REFERENCES tutor(id)
+                    )
+                    """);
 
-            String animal =
-                    "CREATE TABLE IF NOT EXISTS animal (" +
-                            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                            "nome TEXT," +
-                            "especie TEXT," +
-                            "raca TEXT," +
-                            "peso REAL," +
-                            "tutor_id INTEGER" +
-                            ")";
+            stmt.execute("""
+                    CREATE TABLE IF NOT EXISTS veterinario (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        nome TEXT NOT NULL,
+                        crmv TEXT NOT NULL UNIQUE,
+                        especialidade TEXT NOT NULL,
+                        telefone TEXT NOT NULL
+                    )
+                    """);
 
-            String veterinario =
-                    "CREATE TABLE IF NOT EXISTS veterinario (" +
-                            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                            "nome TEXT," +
-                            "crmv TEXT," +
-                            "especialidade TEXT," +
-                            "telefone TEXT" +
-                            ")";
+            stmt.execute("""
+                    CREATE TABLE IF NOT EXISTS consulta (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        animal_id INTEGER NOT NULL,
+                        veterinario_id INTEGER NOT NULL,
+                        data_consulta TEXT NOT NULL,
+                        status TEXT NOT NULL,
+                        FOREIGN KEY (animal_id) REFERENCES animal(id),
+                        FOREIGN KEY (veterinario_id) REFERENCES veterinario(id)
+                    )
+                    """);
 
-            String consulta =
-                    "CREATE TABLE IF NOT EXISTS consulta (" +
-                            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                            "animal_id INTEGER," +
-                            "veterinario_id INTEGER," +
-                            "data_consulta TEXT," +
-                            "status TEXT" +
-                            ")";
+            stmt.execute("""
+                    CREATE TABLE IF NOT EXISTS dashboard (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        titulo TEXT NOT NULL,
+                        valor INTEGER NOT NULL
+                    )
+                    """);
 
-            String dashboard =
-                    "CREATE TABLE IF NOT EXISTS dashboard (" +
-                            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                            "titulo TEXT," +
-                            "valor INTEGER" +
-                            ")";
+            System.out.println("[DB] Tabelas verificadas/criadas com sucesso.");
 
-            PreparedStatement stmtUsuario = conn.prepareStatement(usuario);
-            PreparedStatement stmtTutor = conn.prepareStatement(tutor);
-            PreparedStatement stmtAnimal = conn.prepareStatement(animal);
-            PreparedStatement stmtVeterinario = conn.prepareStatement(veterinario);
-            PreparedStatement stmtConsulta = conn.prepareStatement(consulta);
-            PreparedStatement stmtDashboard = conn.prepareStatement(dashboard);
-
-            stmtUsuario.execute();
-            stmtTutor.execute();
-            stmtAnimal.execute();
-            stmtVeterinario.execute();
-            stmtConsulta.execute();
-            stmtDashboard.execute();
-
-            System.out.println("Banco criado com sucesso!");
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException("Falha ao inicializar banco de dados", e);
         }
     }
 }
