@@ -1,0 +1,7 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.project.sourcePaths": ["src/main/java"],
+  "java.project.outputPath": "target/classes",
+  "java.jdt.ls.javac.enabled": "on",
+  "java.compile.nullAnalysis.mode": "disabled"
+}
