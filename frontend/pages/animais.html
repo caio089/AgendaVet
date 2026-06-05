@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgendaVet — Animais</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-800">
+
+  <div id="toast" class="hidden opacity-0" role="status"></div>
+
+  <div class="flex min-h-screen">
+    <aside class="sidebar-scroll w-64 shrink-0 bg-teal-800 text-teal-50">
+      <div class="border-b border-teal-700 px-6 py-6">
+        <p class="text-xs uppercase tracking-widest text-teal-200">Sistema Acadêmico</p>
+        <h1 class="mt-1 text-2xl font-bold text-white">AgendaVet</h1>
+      </div>
+      <nav class="space-y-1 p-4">
+        <a data-nav href="../index.html" class="block rounded-lg px-4 py-2.5 text-sm font-medium hover:bg-teal-700">Dashboard</a>
+        <a data-nav href="tutores.html" class="block rounded-lg px-4 py-2.5 text-sm font-medium hover:bg-teal-700">Tutores</a>
+        <a data-nav href="animais.html" class="block rounded-lg px-4 py-2.5 text-sm font-medium hover:bg-teal-700">Animais</a>
+        <a data-nav href="veterinarios.html" class="block rounded-lg px-4 py-2.5 text-sm font-medium hover:bg-teal-700">Veterinários</a>
+        <a data-nav href="consultas.html" class="block rounded-lg px-4 py-2.5 text-sm font-medium hover:bg-teal-700">Consultas</a>
+      </nav>
+      <div id="user-panel" class="border-t border-teal-700 p-4 text-xs"></div>
+      <button id="btn-logout" type="button" class="mx-4 mb-4 block w-[calc(100%-2rem)] rounded-lg border border-teal-600 px-3 py-2 text-sm text-teal-100 hover:bg-teal-700">Sair</button>
+      <div class="border-t border-teal-700 p-4 text-xs text-teal-200">
+        Módulo: <strong class="text-teal-50">João Manoel</strong>
+      </div>
+    </aside>
+
+    <main class="flex-1 overflow-auto p-6 lg:p-10">
+      <header class="mb-8">
+        <h2 class="text-3xl font-bold">Animais</h2>
+        <p class="mt-1 text-slate-500">Pets vinculados a tutores via <code class="rounded bg-slate-200 px-1">tutor_id</code>.</p>
+      </header>
+
+      <div class="grid gap-8 xl:grid-cols-5">
+        <section class="xl:col-span-2 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+          <h3 id="form-title" class="text-lg font-semibold">Novo Animal</h3>
+          <form id="animal-form" class="mt-5 space-y-4">
+            <div>
+              <label class="mb-1 block text-sm font-medium" for="nome">Nome *</label>
+              <input id="nome" name="nome" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200" />
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="mb-1 block text-sm font-medium" for="especie">Espécie *</label>
+                <input id="especie" name="especie" required placeholder="Cão, Gato..." class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200" />
+              </div>
+              <div>
+                <label class="mb-1 block text-sm font-medium" for="raca">Raça</label>
+                <input id="raca" name="raca" class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200" />
+              </div>
+            </div>
+            <div>
+              <label class="mb-1 block text-sm font-medium" for="peso">Peso (kg) *</label>
+              <input id="peso" name="peso" type="number" step="0.1" min="0.1" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200" />
+            </div>
+            <div>
+              <label class="mb-1 block text-sm font-medium" for="tutorId">Tutor responsável *</label>
+              <select id="tutorId" name="tutorId" required class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-200"></select>
+            </div>
+            <div class="flex gap-3 pt-2">
+              <button type="submit" class="rounded-lg bg-teal-700 px-4 py-2 text-sm font-medium text-white hover:bg-teal-800">Salvar</button>
+              <button type="button" id="btn-cancel" class="hidden rounded-lg border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50">Cancelar</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="xl:col-span-3 rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+          <div class="border-b border-slate-100 px-6 py-4">
+            <h3 class="text-lg font-semibold">Animais cadastrados</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-left text-sm">
+              <thead class="bg-slate-50 text-slate-500">
+                <tr>
+                  <th class="px-4 py-3 font-medium">Nome</th>
+                  <th class="px-4 py-3 font-medium">Espécie</th>
+                  <th class="px-4 py-3 font-medium">Raça</th>
+                  <th class="px-4 py-3 font-medium">Peso</th>
+                  <th class="px-4 py-3 font-medium">Tutor</th>
+                  <th class="px-4 py-3 font-medium text-right">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="animal-table"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="../js/pages/animais.js"></script>
+</body>
+</html>

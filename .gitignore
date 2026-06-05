@@ -1,0 +1,21 @@
+# Build
+target/
+*.class
+
+# Ferramentas locais (JDK/Maven portáteis — não versionar)
+tools/
+
+# Banco SQLite gerado em runtime
+agendavet.db
+veterinario.db
+clinica_veterinaria.db
+*.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
