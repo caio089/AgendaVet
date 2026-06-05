@@ -3,9 +3,8 @@ package com.agendai.app;
 /**
  * Entidade Usuario — autenticação e controle de acesso ao sistema.
  */
-public class Usuario {
+public class Usuario extends EntidadeBase {
 
-    private int id;
     private String nome;
     private String email;
     private String senha;
@@ -27,14 +26,6 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
         this.perfil = perfil;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -67,5 +58,10 @@ public class Usuario {
 
     public void setPerfil(String perfil) {
         this.perfil = perfil;
+    }
+
+    @Override
+    public String resumo() {
+        return "Usuario: " + nome + " (" + perfil + ")";
     }
 }

@@ -1,12 +1,10 @@
 package com.agendai.app;
 
 /**
- * Entidade Tutor — módulo Ryan-nextLvl.
- * Responsável legal pelos animais cadastrados na clínica.
+ * Entidade Tutor — responsável legal pelos animais cadastrados na clínica.
  */
-public class Tutor {
+public class Tutor extends EntidadeBase {
 
-    private int id;
     private String nome;
     private String cpf;
     private String telefone;
@@ -28,14 +26,6 @@ public class Tutor {
         this.cpf = cpf;
         this.telefone = telefone;
         this.endereco = endereco;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
@@ -68,6 +58,11 @@ public class Tutor {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public String resumo() {
+        return "Tutor: " + nome + " (CPF " + cpf + ")";
     }
 
     @Override

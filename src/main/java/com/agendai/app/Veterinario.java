@@ -1,13 +1,17 @@
 package com.agendai.app;
-public class Veterinario {
 
-    private int id;
+/**
+ * Entidade Veterinario — profissionais da clínica.
+ */
+public class Veterinario extends EntidadeBase {
+
     private String nome;
     private String crmv;
     private String especialidade;
     private String telefone;
 
-    public Veterinario() {}
+    public Veterinario() {
+    }
 
     public Veterinario(int id, String nome, String crmv, String especialidade, String telefone) {
         this.id = id;
@@ -24,46 +28,21 @@ public class Veterinario {
         this.telefone = telefone;
     }
 
-    // Getters e Setters
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public int getId() {
-        return id;
-    }
+    public String getCrmv() { return crmv; }
+    public void setCrmv(String crmv) { this.crmv = crmv; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getEspecialidade() { return especialidade; }
+    public void setEspecialidade(String especialidade) { this.especialidade = especialidade; }
 
-    public String getNome() {
-        return nome;
-    }
+    public String getTelefone() { return telefone; }
+    public void setTelefone(String telefone) { this.telefone = telefone; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCrmv() {
-        return crmv;
-    }
-
-    public void setCrmv(String crmv) {
-        this.crmv = crmv;
-    }
-
-    public String getEspecialidade() {
-        return especialidade;
-    }
-
-    public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    @Override
+    public String resumo() {
+        return "Veterinario: " + nome + " - " + especialidade;
     }
 
     @Override

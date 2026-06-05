@@ -1,12 +1,10 @@
 package com.agendai.app;
 
 /**
- * Entidade Consulta — módulo Erick Ruan.
- * Agendamento que relaciona um animal a um veterinário.
+ * Entidade Consulta — agendamento que relaciona um animal a um veterinário.
  */
-public class Consulta {
+public class Consulta extends EntidadeBase {
 
-    private int id;
     private int animalId;
     private int veterinarioId;
     private String dataConsulta;
@@ -28,14 +26,6 @@ public class Consulta {
         this.veterinarioId = veterinarioId;
         this.dataConsulta = dataConsulta;
         this.status = status;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getAnimalId() {
@@ -68,6 +58,11 @@ public class Consulta {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String resumo() {
+        return "Consulta #" + id + " - status: " + status;
     }
 
     @Override
