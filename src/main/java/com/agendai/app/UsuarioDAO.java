@@ -1,8 +1,16 @@
 package com.agendai.app;
 
+import java.util.List;
+
 public interface UsuarioDAO {
 
-    Usuario buscarPorEmail(String email);
+    void salvar(Usuario usuario);
 
-    Usuario autenticar(String email, String senhaPlana);
+    List<Usuario> listar();
+
+    Usuario buscarPorId(int id);
+
+    void atualizar(Usuario usuario);
+
+    void deletar(int id);
 }
