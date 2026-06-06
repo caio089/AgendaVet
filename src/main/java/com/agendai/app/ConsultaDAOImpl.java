@@ -1,4 +1,4 @@
-package com.agendai.app;
+package com.agendai.app; // Módulo de Consultas - Erick Ruan
 
 import com.agendai.database.DatabaseConnection;
 
