@@ -14,7 +14,7 @@ import com.agendai.app.UsuarioDAO;
 import com.agendai.app.UsuarioDAOImpl;
 import com.agendai.app.Veterinario;
 import com.agendai.app.VeterinarioDAOImpl;
-import com.agendai.app.Veterinariodao;
+import com.agendai.app.VeterinarioDAO;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -30,7 +30,7 @@ public class ApiDispatcher implements HttpHandler {
 
     private final TutorDAO tutorDAO = new TutorDAOImpl();
     private final AnimalDAO animalDAO = new AnimalDAOImpl();
-    private final Veterinariodao veterinarioDAO = new VeterinarioDAOImpl();
+    private final VeterinarioDAO VeterinarioDAO = new VeterinarioDAOImpl();
     private final ConsultaDAO consultaDAO = new ConsultaDAOImpl();
     private final UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
 
@@ -132,7 +132,7 @@ public class ApiDispatcher implements HttpHandler {
         Map<String, Object> stats = new LinkedHashMap<>();
         stats.put("tutores", tutorDAO.listar().size());
         stats.put("animais", animalDAO.listar().size());
-        stats.put("veterinarios", veterinarioDAO.listar().size());
+        stats.put("veterinarios", VeterinarioDAO.listar().size());
         stats.put("consultas", consultaDAO.listar().size());
         HttpUtil.sendJson(exchange, 200, stats);
     }
@@ -269,9 +269,9 @@ public class ApiDispatcher implements HttpHandler {
         switch (method) {
             case "GET" -> {
                 if (id == null) {
-                    HttpUtil.sendJson(exchange, 200, veterinarioDAO.listar());
+                    HttpUtil.sendJson(exchange, 200, VeterinarioDAO.listar());
                 } else {
-                    Veterinario vet = veterinarioDAO.buscarPorId(id);
+                    Veterinario vet = VeterinarioDAO.buscarPorId(id);
                     if (vet == null) {
                         HttpUtil.sendError(exchange, 404, "Veterinário não encontrado");
                     } else {
@@ -281,7 +281,7 @@ public class ApiDispatcher implements HttpHandler {
             }
             case "POST" -> {
                 Veterinario vet = HttpUtil.gson().fromJson(HttpUtil.readBody(exchange), Veterinario.class);
-                veterinarioDAO.salvar(vet);
+                VeterinarioDAO.salvar(vet);
                 HttpUtil.sendJson(exchange, 201, vet);
             }
             case "PUT" -> {
@@ -291,23 +291,23 @@ public class ApiDispatcher implements HttpHandler {
                 }
                 Veterinario vet = HttpUtil.gson().fromJson(HttpUtil.readBody(exchange), Veterinario.class);
                 vet.setId(id);
-                if (veterinarioDAO.buscarPorId(id) == null) {
+                if (VeterinarioDAO.buscarPorId(id) == null) {
                     HttpUtil.sendError(exchange, 404, "Veterinário não encontrado");
                     return;
                 }
-                veterinarioDAO.atualizar(vet);
-                HttpUtil.sendJson(exchange, 200, veterinarioDAO.buscarPorId(id));
+                VeterinarioDAO.atualizar(vet);
+                HttpUtil.sendJson(exchange, 200, VeterinarioDAO.buscarPorId(id));
             }
             case "DELETE" -> {
                 if (id == null) {
                     HttpUtil.sendError(exchange, 400, "Informe o ID na URL");
                     return;
                 }
-                if (veterinarioDAO.buscarPorId(id) == null) {
+                if (VeterinarioDAO.buscarPorId(id) == null) {
                     HttpUtil.sendError(exchange, 404, "Veterinário não encontrado");
                     return;
                 }
-                veterinarioDAO.deletar(id);
+                VeterinarioDAO.deletar(id);
                 HttpUtil.sendNoContent(exchange);
             }
             default -> HttpUtil.sendError(exchange, 405, "Método não permitido");

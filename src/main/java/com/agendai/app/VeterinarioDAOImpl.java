@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.agendai.database.DatabaseConnection;
 
-public class VeterinarioDAOImpl implements Veterinariodao {
+public class VeterinarioDAOImpl implements VeterinarioDAO {
 
     // -------------------------------------------------------------------------
     // salvar

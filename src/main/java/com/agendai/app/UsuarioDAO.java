@@ -10,6 +10,8 @@ public interface UsuarioDAO {
 
     Usuario buscarPorId(int id);
 
+    Usuario autenticar(String email, String senha);
+
     void atualizar(Usuario usuario);
 
     void deletar(int id);

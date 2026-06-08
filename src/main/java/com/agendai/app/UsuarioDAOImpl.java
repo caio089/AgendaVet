@@ -86,6 +86,31 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
 
     @Override
+    public Usuario autenticar(String email, String senha) {
+        String sql = "SELECT id, nome, email, senha, perfil FROM usuario WHERE email = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, email.toLowerCase());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Usuario usuario = mapear(rs);
+                    if (PasswordUtil.matches(senha, usuario.getSenha())) {
+                        return usuario;
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("[ERRO] autenticar: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    @Override
     public void atualizar(Usuario usuario) {
         String sql = """
                 UPDATE usuario

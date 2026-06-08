@@ -2,7 +2,7 @@ package com.agendai.app;
 
 import java.util.List;
 
-public interface Veterinariodao {
+public interface VeterinarioDAO {
 
     /**
      * Salva um novo veterinário no banco de dados.
