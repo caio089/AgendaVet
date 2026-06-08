@@ -1,4 +1,6 @@
-package com.agendai.app;
+package com.agendai.dao;
+
+import com.agendai.model.Tutor;
 
 import java.util.List;
 

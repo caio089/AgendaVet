@@ -1,6 +1,8 @@
-package com.agendai.app;
+package com.agendai.dao;
 
-import com.agendai.database.DatabaseConnection;
+import com.agendai.config.DatabaseConnection;
+import com.agendai.model.Usuario;
+import com.agendai.util.PasswordUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +21,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 VALUES (?, ?, ?, ?)
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql,
                      Statement.RETURN_GENERATED_KEYS)) {
 
@@ -48,7 +50,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         String sql = "SELECT id, nome, email, senha, perfil FROM usuario";
         List<Usuario> usuarios = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -67,7 +69,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public Usuario buscarPorId(int id) {
         String sql = "SELECT id, nome, email, senha, perfil FROM usuario WHERE id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
@@ -89,7 +91,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public Usuario autenticar(String email, String senha) {
         String sql = "SELECT id, nome, email, senha, perfil FROM usuario WHERE email = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, email.toLowerCase());
@@ -121,7 +123,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                  WHERE id = ?
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, usuario.getNome());
@@ -147,7 +149,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public void deletar(int id) {
         String sql = "DELETE FROM usuario WHERE id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);

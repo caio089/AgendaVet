@@ -1,4 +1,4 @@
-package com.agendai.api;
+package com.agendai.controller;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;

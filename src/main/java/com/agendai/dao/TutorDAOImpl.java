@@ -1,6 +1,7 @@
-package com.agendai.app;
+package com.agendai.dao;
 
-import com.agendai.database.DatabaseConnection;
+import com.agendai.config.DatabaseConnection;
+import com.agendai.model.Tutor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +23,7 @@ public class TutorDAOImpl implements TutorDAO {
                 VALUES (?, ?, ?, ?)
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, tutor.getNome());
@@ -47,7 +48,7 @@ public class TutorDAOImpl implements TutorDAO {
         String sql = "SELECT id, nome, cpf, telefone, endereco FROM tutor ORDER BY nome";
         List<Tutor> lista = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -66,7 +67,7 @@ public class TutorDAOImpl implements TutorDAO {
     public Tutor buscarPorId(int id) {
         String sql = "SELECT id, nome, cpf, telefone, endereco FROM tutor WHERE id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
@@ -92,7 +93,7 @@ public class TutorDAOImpl implements TutorDAO {
                  WHERE id = ?
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, tutor.getNome());
@@ -111,7 +112,7 @@ public class TutorDAOImpl implements TutorDAO {
     public void deletar(int id) {
         String sql = "DELETE FROM tutor WHERE id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);

@@ -1,4 +1,4 @@
-package com.agendai.database;
+package com.agendai.config;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -14,7 +14,7 @@ public final class DatabaseInitializer {
     }
 
     public static void init() {
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              Statement stmt = conn.createStatement()) {
 
             stmt.execute("""

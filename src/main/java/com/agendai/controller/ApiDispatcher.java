@@ -1,20 +1,20 @@
-package com.agendai.api;
+package com.agendai.controller;
 
-import com.agendai.app.Animal;
-import com.agendai.app.AnimalDAO;
-import com.agendai.app.AnimalDAOImpl;
-import com.agendai.app.Consulta;
-import com.agendai.app.ConsultaDAO;
-import com.agendai.app.ConsultaDAOImpl;
-import com.agendai.app.Tutor;
-import com.agendai.app.TutorDAO;
-import com.agendai.app.TutorDAOImpl;
-import com.agendai.app.Usuario;
-import com.agendai.app.UsuarioDAO;
-import com.agendai.app.UsuarioDAOImpl;
-import com.agendai.app.Veterinario;
-import com.agendai.app.VeterinarioDAOImpl;
-import com.agendai.app.VeterinarioDAO;
+import com.agendai.dao.AnimalDAO;
+import com.agendai.dao.AnimalDAOImpl;
+import com.agendai.dao.ConsultaDAO;
+import com.agendai.dao.ConsultaDAOImpl;
+import com.agendai.dao.TutorDAO;
+import com.agendai.dao.TutorDAOImpl;
+import com.agendai.dao.UsuarioDAO;
+import com.agendai.dao.UsuarioDAOImpl;
+import com.agendai.dao.VeterinarioDAO;
+import com.agendai.dao.VeterinarioDAOImpl;
+import com.agendai.model.Animal;
+import com.agendai.model.Consulta;
+import com.agendai.model.Tutor;
+import com.agendai.model.Usuario;
+import com.agendai.model.Veterinario;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 

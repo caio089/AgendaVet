@@ -1,4 +1,4 @@
-package com.agendai.app;
+package com.agendai.model;
 
 /**
  * Entidade Tutor — responsável legal pelos animais cadastrados na clínica.

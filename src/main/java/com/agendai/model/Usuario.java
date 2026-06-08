@@ -1,4 +1,4 @@
-package com.agendai.app;
+package com.agendai.model;
 
 /**
  * Entidade Usuario — autenticação e controle de acesso ao sistema.

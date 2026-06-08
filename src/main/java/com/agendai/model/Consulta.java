@@ -1,4 +1,4 @@
-package com.agendai.app;
+package com.agendai.model;
 
 /**
  * Entidade Consulta — agendamento que relaciona um animal a um veterinário.

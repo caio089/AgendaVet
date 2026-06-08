@@ -1,6 +1,7 @@
-package com.agendai.app;
+package com.agendai.dao;
 
-import com.agendai.database.DatabaseConnection;
+import com.agendai.config.DatabaseConnection;
+import com.agendai.model.Animal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class AnimalDAOImpl implements AnimalDAO {
                 VALUES (?, ?, ?, ?, ?)
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql,
                      Statement.RETURN_GENERATED_KEYS)) {
 
@@ -49,7 +50,7 @@ public class AnimalDAOImpl implements AnimalDAO {
         String sql = "SELECT id, nome, especie, raca, peso, tutor_id FROM animal";
         List<Animal> animais = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -68,7 +69,7 @@ public class AnimalDAOImpl implements AnimalDAO {
     public Animal buscarPorId(int id) {
         String sql = "SELECT id, nome, especie, raca, peso, tutor_id FROM animal WHERE id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
@@ -98,7 +99,7 @@ public class AnimalDAOImpl implements AnimalDAO {
                  WHERE id = ?
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, animal.getNome());
@@ -125,7 +126,7 @@ public class AnimalDAOImpl implements AnimalDAO {
     public void deletar(int id) {
         String sql = "DELETE FROM animal WHERE id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);

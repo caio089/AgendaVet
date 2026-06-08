@@ -1,4 +1,4 @@
-package com.agendai.api;
+package com.agendai.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

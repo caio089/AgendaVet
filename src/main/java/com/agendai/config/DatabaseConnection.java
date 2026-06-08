@@ -1,21 +1,27 @@
-package com.agendai.database;
+package com.agendai.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Conexão singleton com o banco SQLite do projeto.
- * Arquivo gerado na raiz do projeto: agendavet.db
- */
+// Singleton: garante que apenas uma instância de DatabaseConnection exista em toda a aplicação.
 public final class DatabaseConnection {
 
     private static final String URL = "jdbc:sqlite:agendavet.db";
 
+    private static DatabaseConnection instance;
+
     private DatabaseConnection() {
     }
 
-    public static Connection getConnection() throws SQLException {
+    public static synchronized DatabaseConnection getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnection();
+        }
+        return instance;
+    }
+
+    public Connection getConnection() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection(URL);
@@ -27,9 +33,5 @@ public final class DatabaseConnection {
                     e
             );
         }
-    }
-
-    public static void fecharConexao() {
-        // Conexões são criadas por chamada e fechadas via try-with-resources nos DAOs.
     }
 }

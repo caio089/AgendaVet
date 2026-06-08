@@ -1,6 +1,6 @@
-package com.agendai.database;
+package com.agendai.config;
 
-import com.agendai.app.PasswordUtil;
+import com.agendai.util.PasswordUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ public final class DataSeeder {
     }
 
     public static void seedIfEmpty() {
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getInstance().getConnection()) {
             seedUsuariosIfEmpty(conn);
 
             if (count(conn, "tutor") > 0) {

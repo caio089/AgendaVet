@@ -1,4 +1,4 @@
-package com.agendai.app;
+package com.agendai.util;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

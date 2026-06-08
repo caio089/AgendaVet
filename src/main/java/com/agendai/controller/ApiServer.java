@@ -1,8 +1,7 @@
-package com.agendai.api;
+package com.agendai.controller;
 
-import com.agendai.database.DataSeeder;
-import com.agendai.database.DatabaseConnection;
-import com.agendai.database.DatabaseInitializer;
+import com.agendai.config.DataSeeder;
+import com.agendai.config.DatabaseInitializer;
 import com.sun.net.httpserver.HttpServer;
 
 import java.net.InetSocketAddress;
@@ -41,7 +40,6 @@ public final class ApiServer {
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             server.stop(1);
-            DatabaseConnection.fecharConexao();
             System.out.println("\n[Servidor] Encerrado.");
         }));
 

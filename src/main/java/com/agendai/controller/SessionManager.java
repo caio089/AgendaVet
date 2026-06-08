@@ -1,6 +1,6 @@
-package com.agendai.api;
+package com.agendai.controller;
 
-import com.agendai.app.Usuario;
+import com.agendai.model.Usuario;
 
 import java.util.Map;
 import java.util.UUID;

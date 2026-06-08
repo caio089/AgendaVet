@@ -1,6 +1,6 @@
 package com.agendai.app;
 
-import com.agendai.api.ApiServer;
+import com.agendai.controller.ApiServer;
 
 /**
  * Ponto de entrada da aplicação AgendaVet.

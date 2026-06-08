@@ -1,4 +1,4 @@
-package com.agendai.app;
+package com.agendai.model;
 
 /**
  * Classe base abstrata para as entidades do domínio AgendaVet.

@@ -1,4 +1,4 @@
-package com.agendai.app;
+package com.agendai.model;
 
 /**
  * Entidade Animal — pets cadastrados na clínica (pertence a um Tutor).

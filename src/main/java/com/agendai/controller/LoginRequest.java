@@ -1,4 +1,4 @@
-package com.agendai.api;
+package com.agendai.controller;
 
 /** Payload JSON do POST /api/auth/login */
 public class LoginRequest {

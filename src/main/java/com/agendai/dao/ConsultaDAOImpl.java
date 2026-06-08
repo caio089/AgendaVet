@@ -1,6 +1,7 @@
-package com.agendai.app;
+package com.agendai.dao;
 
-import com.agendai.database.DatabaseConnection;
+import com.agendai.config.DatabaseConnection;
+import com.agendai.model.Consulta;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +23,7 @@ public class ConsultaDAOImpl implements ConsultaDAO {
                 VALUES (?, ?, ?, ?)
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setInt(1, consulta.getAnimalId());
@@ -51,7 +52,7 @@ public class ConsultaDAOImpl implements ConsultaDAO {
                 """;
         List<Consulta> lista = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -74,7 +75,7 @@ public class ConsultaDAOImpl implements ConsultaDAO {
                  WHERE id = ?
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
@@ -103,7 +104,7 @@ public class ConsultaDAOImpl implements ConsultaDAO {
                  WHERE id = ?
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, consulta.getAnimalId());
@@ -122,7 +123,7 @@ public class ConsultaDAOImpl implements ConsultaDAO {
     public void deletar(int id) {
         String sql = "DELETE FROM consulta WHERE id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);

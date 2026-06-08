@@ -1,4 +1,8 @@
-package com.agendai.app;
+package com.agendai.dao;
+
+import com.agendai.config.DatabaseConnection;
+import com.agendai.model.Veterinario;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,8 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.agendai.database.DatabaseConnection;
 
 public class VeterinarioDAOImpl implements VeterinarioDAO {
 
@@ -22,7 +24,7 @@ public class VeterinarioDAOImpl implements VeterinarioDAO {
                 VALUES (?, ?, ?, ?)
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, veterinario.getNome());
@@ -58,7 +60,7 @@ public class VeterinarioDAOImpl implements VeterinarioDAO {
         final String sql = "SELECT id, nome, crmv, especialidade, telefone FROM veterinario ORDER BY nome";
         List<Veterinario> lista = new ArrayList<>();
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -81,7 +83,7 @@ public class VeterinarioDAOImpl implements VeterinarioDAO {
     public Veterinario buscarPorId(int id) {
         final String sql = "SELECT id, nome, crmv, especialidade, telefone FROM veterinario WHERE id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
@@ -111,7 +113,7 @@ public class VeterinarioDAOImpl implements VeterinarioDAO {
                 WHERE id = ?
                 """;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, veterinario.getNome());
@@ -144,7 +146,7 @@ public class VeterinarioDAOImpl implements VeterinarioDAO {
     public boolean deletar(int id) {
         final String sql = "DELETE FROM veterinario WHERE id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
