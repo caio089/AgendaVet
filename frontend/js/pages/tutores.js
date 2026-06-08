@@ -3,7 +3,7 @@
  */
 
 import { TutorRepo } from '../services/api.js';
-import { requireAuth, setupUserPanel } from '../utils/auth-guard.js';
+import { requireAuth, setupNav, setupUserPanel } from '../utils/auth-guard.js';
 import { getFormData, setActiveNav, showToast } from '../utils/helpers.js';
 
 const form = document.getElementById('tutor-form');
@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     await requireAuth();
     setupUserPanel();
+    setupNav();
     setActiveNav('tutores.html');
     await renderTable();
     bindEvents();

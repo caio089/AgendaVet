@@ -3,7 +3,7 @@
  */
 
 import { AnimalRepo, TutorRepo } from '../services/api.js';
-import { requireAuth, setupUserPanel } from '../utils/auth-guard.js';
+import { requireAuth, setupNav, setupUserPanel } from '../utils/auth-guard.js';
 import { fillSelect, getFormData, setActiveNav, showToast } from '../utils/helpers.js';
 
 const form = document.getElementById('animal-form');
@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     await requireAuth();
     setupUserPanel();
+    setupNav();
     setActiveNav('animais.html');
     await loadTutorOptions();
     await renderTable();

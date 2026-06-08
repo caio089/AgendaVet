@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Cria todas as tabelas do sistema (módulo Icaro Ryan).
+ * Cria todas as tabelas do sistema.
  * Chamado uma vez na inicialização do servidor.
  */
 public final class DatabaseInitializer {

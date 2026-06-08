@@ -260,6 +260,15 @@ public class ApiDispatcher implements HttpHandler {
     // -------------------------------------------------------------------------
 
     private void handleVeterinarios(HttpExchange exchange, String method, String path) throws IOException {
+        if (!"GET".equals(method)) {
+            String token = HttpUtil.extractBearerToken(exchange);
+            Usuario u = SessionManager.getUsuario(token);
+            if (u != null && "recepcao".equals(u.getPerfil())) {
+                HttpUtil.sendError(exchange, 403, "Acesso negado. Apenas administradores podem gerenciar veterinários.");
+                return;
+            }
+        }
+
         Integer id = HttpUtil.extractId(path, "/api/veterinarios");
         if (id != null && id < 0) {
             HttpUtil.sendError(exchange, 404, "ID inválido");

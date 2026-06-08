@@ -37,25 +37,12 @@
         Sair
       </button>
 
-      <div class="border-t border-teal-700 p-4 text-xs text-teal-200">
-        <p class="font-semibold text-teal-100">Integrantes</p>
-        <ul class="mt-2 space-y-1">
-          <li>Caio — Frontend e Arquiteto</li>
-          <li>Arthur — README.md</li>
-          <li>Icaro — Banco SQLite</li>
-          <li>Ryan — Tutores</li>
-          <li>João — Animais</li>
-          <li>Ismael — Veterinários</li>
-          <li>Erick — Consultas</li>
-        </ul>
-      </div>
     </aside>
 
     <!-- Conteúdo principal -->
     <main class="flex-1 overflow-auto p-6 lg:p-10">
       <header class="mb-8">
         <h2 class="text-3xl font-bold text-slate-900">Dashboard</h2>
-        <p class="mt-1 text-slate-500">Visão geral do sistema — espelha a tabela <code class="rounded bg-slate-200 px-1">dashboard</code> do backend.</p>
       </header>
 
       <!-- Cards de estatísticas -->
@@ -82,24 +69,6 @@
         </div>
       </section>
 
-      <!-- Mapa de módulos do projeto -->
-      <section class="mt-8 grid gap-4 lg:grid-cols-2">
-        <article class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-          <h3 class="text-lg font-semibold">Arquitetura do backend (Java)</h3>
-          <p class="mt-2 text-sm text-slate-600">
-            O backend usa JDBC + SQLite com padrão DAO. Cada integrante implementou o CRUD de uma entidade.
-            O servidor HTTP Java expõe a API REST em <strong>/api/*</strong> e persiste no arquivo <strong>agendavet.db</strong>.
-          </p>
-        </article>
-        <article class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-          <h3 class="text-lg font-semibold">Relacionamentos</h3>
-          <ul class="mt-3 space-y-2 text-sm text-slate-600">
-            <li>• Tutor → possui vários Animais (<code>tutor_id</code>)</li>
-            <li>• Consulta → referencia Animal e Veterinário</li>
-            <li>• Dashboard → contadores agregados das entidades</li>
-          </ul>
-        </article>
-      </section>
     </main>
   </div>
 

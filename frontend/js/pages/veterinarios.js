@@ -3,7 +3,7 @@
  */
 
 import { VeterinarioRepo } from '../services/api.js';
-import { requireAuth, setupUserPanel } from '../utils/auth-guard.js';
+import { requireAdmin, requireAuth, setupNav, setupUserPanel } from '../utils/auth-guard.js';
 import { getFormData, setActiveNav, showToast } from '../utils/helpers.js';
 
 const form = document.getElementById('vet-form');
@@ -121,7 +121,9 @@ function bindEvents() {
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     await requireAuth();
+    requireAdmin();
     setupUserPanel();
+    setupNav();
     setActiveNav('veterinarios.html');
     await renderTable();
     bindEvents();

@@ -4,7 +4,7 @@
 
 import { AnimalRepo, ConsultaRepo, TutorRepo, VeterinarioRepo } from '../services/api.js';
 import { STATUS_CONSULTA } from '../config/constants.js';
-import { requireAuth, setupUserPanel } from '../utils/auth-guard.js';
+import { requireAuth, setupNav, setupUserPanel } from '../utils/auth-guard.js';
 import { fillSelect, formatDateTime, getFormData, setActiveNav, showToast, statusBadge } from '../utils/helpers.js';
 
 const form = document.getElementById('consulta-form');
@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     await requireAuth();
     setupUserPanel();
+    setupNav();
     setActiveNav('consultas.html');
     await loadSelectOptions();
     await renderTable();

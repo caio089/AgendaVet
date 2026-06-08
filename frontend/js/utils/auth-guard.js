@@ -14,6 +14,23 @@ export async function requireAuth() {
   return usuario;
 }
 
+/** Redireciona para o dashboard se o usuário não for admin */
+export function requireAdmin() {
+  const usuario = getUser();
+  if (usuario && usuario.perfil !== 'admin') {
+    window.location.href = '/index.html';
+    throw new Error('Acesso restrito a administradores.');
+  }
+}
+
+/** Esconde o link de Veterinários na sidebar para usuários não-admin */
+export function setupNav() {
+  const usuario = getUser();
+  if (usuario && usuario.perfil !== 'admin') {
+    document.querySelectorAll('a[href*="veterinarios.html"]').forEach(el => el.remove());
+  }
+}
+
 /** Exibe nome do usuário e botão sair na sidebar */
 export function setupUserPanel() {
   const panel = document.getElementById('user-panel');

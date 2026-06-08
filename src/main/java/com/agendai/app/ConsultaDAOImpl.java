@@ -1,4 +1,4 @@
-package com.agendai.app; // Módulo de Consultas - Erick Ruan
+package com.agendai.app;
 
 import com.agendai.database.DatabaseConnection;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implementação JDBC do CRUD de Consulta (módulo Erick Ruan).
+ * Implementação JDBC do CRUD de Consulta.
  */
 public class ConsultaDAOImpl implements ConsultaDAO {
 

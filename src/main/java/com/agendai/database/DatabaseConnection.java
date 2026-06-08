@@ -11,38 +11,25 @@ import java.sql.SQLException;
 public final class DatabaseConnection {
 
     private static final String URL = "jdbc:sqlite:agendavet.db";
-    private static Connection instance;
 
     private DatabaseConnection() {
     }
 
     public static Connection getConnection() throws SQLException {
-        if (instance == null || instance.isClosed()) {
-            try {
-                Class.forName("org.sqlite.JDBC");
-                instance = DriverManager.getConnection(URL);
-                instance.setAutoCommit(true);
-            } catch (ClassNotFoundException e) {
-                throw new SQLException(
-                        "Driver SQLite não encontrado. Verifique a dependência sqlite-jdbc.",
-                        e
-                );
-            }
+        try {
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection(URL);
+            conn.setAutoCommit(true);
+            return conn;
+        } catch (ClassNotFoundException e) {
+            throw new SQLException(
+                    "Driver SQLite não encontrado. Verifique a dependência sqlite-jdbc.",
+                    e
+            );
         }
-        return instance;
     }
 
     public static void fecharConexao() {
-        if (instance != null) {
-            try {
-                if (!instance.isClosed()) {
-                    instance.close();
-                }
-            } catch (SQLException e) {
-                System.err.println("Erro ao fechar conexão: " + e.getMessage());
-            } finally {
-                instance = null;
-            }
-        }
+        // Conexões são criadas por chamada e fechadas via try-with-resources nos DAOs.
     }
 }

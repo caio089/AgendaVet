@@ -10,7 +10,7 @@ import {
   TutorRepo,
   VeterinarioRepo,
 } from '../services/api.js';
-import { requireAuth, setupUserPanel } from '../utils/auth-guard.js';
+import { requireAuth, setupNav, setupUserPanel } from '../utils/auth-guard.js';
 import { setActiveNav, statusBadge } from '../utils/helpers.js';
 
 /** Monta os cards de estatísticas no topo da página */
@@ -74,6 +74,7 @@ async function renderRecentConsultas() {
 async function init() {
   await requireAuth();
   setupUserPanel();
+  setupNav();
   setActiveNav('index.html');
   try {
     await renderStats();
