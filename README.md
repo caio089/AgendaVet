@@ -75,13 +75,13 @@ As **duas entidades principais com relacionamento** exigidas pelo trabalho são 
 
 O projeto segue o padrão **MVC** com separação estrita de responsabilidades. Como a apresentação é feita por uma interface web consumindo uma API REST, as camadas MVC mapeiam-se da seguinte forma:
 
-| Camada MVC          | Implementação no projeto                                                    | Pacote / Pasta                           |
-| ------------------- | --------------------------------------------------------------------------- | ---------------------------------------- |
-| **Model**           | Entidades de domínio (`Tutor`, `Animal`, `Veterinario`, `Consulta`, `Usuario`) | `com.agendai.model`                   |
-| **View**            | Telas HTML + CSS + JS que renderizam e capturam dados do usuário             | `frontend/`                              |
+| Camada MVC          | Implementação no projeto                                                    | Pacote / Pasta                       |
+| ------------------- | --------------------------------------------------------------------------- | ------------------------------------ |
+| **Model**           | Entidades de domínio (`Tutor`, `Animal`, `Veterinario`, `Consulta`, `Usuario`) | `com.agendai.model`                  |
+| **View**            | Telas HTML + CSS + JS que renderizam e capturam dados do usuário             | `frontend/`                          |
 | **Controller**      | Roteador REST que recebe as requisições e orquestra as operações             | `com.agendai.controller` (`ApiDispatcher`) |
 | **Repository / DAO**| Acesso a dados via JDBC (interfaces DAO + implementações)                     | `com.agendai.dao` (`*DAO`, `*DAOImpl`) |
-| **Config**          | Conexão, criação de tabelas e carga inicial do banco                         | `com.agendai.config`                     |
+| **Config**          | Conexão, criação de tabelas e carga inicial do banco                         | `com.agendai.config`                 |
 
 O fluxo de uma requisição: **View (frontend) → Controller (ApiDispatcher) → DAO → Banco de Dados** e o caminho de volta com a resposta em JSON.
 
@@ -203,10 +203,10 @@ AgendaVet/
 │       └── pages/                  # Lógica de cada tela
 │
 └── src/main/java/com/agendai/
-    ├── app/                        # Ponto de entrada da aplicação
-    │   └── Main.java               # Inicializa e sobe o servidor
+    ├── app/                        # Ponto de entrada
+    │   └── Main.java
     │
-    ├── model/                      # Entidades de domínio (Model)
+    ├── model/                      # Model — entidades de domínio
     │   ├── EntidadeBase.java       # Classe ABSTRATA base das entidades
     │   ├── Tutor.java
     │   ├── Animal.java
@@ -214,14 +214,14 @@ AgendaVet/
     │   ├── Consulta.java
     │   └── Usuario.java
     │
-    ├── dao/                        # Acesso a dados — interfaces + implementações JDBC
-    │   ├── TutorDAO.java           / TutorDAOImpl.java
-    │   ├── AnimalDAO.java          / AnimalDAOImpl.java
-    │   ├── VeterinarioDAO.java     / VeterinarioDAOImpl.java
-    │   ├── ConsultaDAO.java        / ConsultaDAOImpl.java
-    │   └── UsuarioDAO.java         / UsuarioDAOImpl.java
+    ├── dao/                        # Repository / DAO (acesso a dados)
+    │   ├── TutorDAO.java        / TutorDAOImpl.java
+    │   ├── AnimalDAO.java       / AnimalDAOImpl.java
+    │   ├── VeterinarioDAO.java  / VeterinarioDAOImpl.java
+    │   ├── ConsultaDAO.java     / ConsultaDAOImpl.java
+    │   └── UsuarioDAO.java      / UsuarioDAOImpl.java
     │
-    ├── controller/                 # Controller REST
+    ├── controller/                 # Controller (REST)
     │   ├── ApiServer.java          # Inicia o servidor (porta 8080)
     │   ├── ApiDispatcher.java      # Roteamento /api/*
     │   ├── StaticFileHandler.java  # Serve o frontend/
@@ -229,12 +229,12 @@ AgendaVet/
     │   ├── HttpUtil.java           # Utilitários HTTP/JSON
     │   └── LoginRequest.java       # DTO de login
     │
-    ├── config/                     # Configuração e inicialização do banco
-    │   ├── DatabaseConnection.java # Singleton de conexão com o SQLite
+    ├── config/                     # Config / Persistência
+    │   ├── DatabaseConnection.java # Conexão Singleton com o SQLite
     │   ├── DatabaseInitializer.java# CREATE TABLE automático
     │   └── DataSeeder.java         # Dados de exemplo na 1ª execução
     │
-    └── util/                       # Utilitários transversais
+    └── util/                       # Utilitários
         └── PasswordUtil.java       # Hash de senha (SHA-256)
 ```
 
